@@ -1,5 +1,4 @@
 ---
-#Execute the below ONTAP Role after Nexus playbook
 - name: Configure ONTAP for FlexPod Base Setup
   hosts: ontap
   gather_facts: False
