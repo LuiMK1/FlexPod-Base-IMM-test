@@ -10,7 +10,7 @@
   connection: local
   roles:
   - { role: ONTAP/ontap_primary_setup, tags: [ 'ontap_primary_setup' ] }
-  - { role: ONTAP/ontap_network, tags: [ 'ontap_network' ] }
+  #- { role: ONTAP/ontap_network, tags: [ 'ontap_network' ] }
   tags:
   - ontap_base_config
   - flexpod_base_config
