@@ -1,4 +1,5 @@
 ---
+
 - name: Configure ONTAP for FlexPod Base Setup
   hosts: ontap
   gather_facts: False
@@ -7,6 +8,19 @@
     - group_vars/all.yml
     - vars/ontap_main.yml
   connection: local
+
+  tasks:
+    - name: Print inventory host name
+      debug:
+        msg: "inventory_hostname={{ inventory_hostname }}"
+
+    - name: Print ansible_host passed from inventory-file
+      debug:
+        msg: "ansible_host={{ ansible_host }}"
+
+    - name: Print all variables for this host
+      debug:
+        var: hostvars[inventory_hostname]
   roles:
   - { role: ONTAP/ontap_primary_setup, tags: [ 'ontap_primary_setup' ] }
   #- { role: ONTAP/ontap_network, tags: [ 'ontap_network' ] }
