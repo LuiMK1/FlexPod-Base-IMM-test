@@ -3,10 +3,20 @@
   hosts: ontap
   gather_facts: False
   vars_files:
-    - group_vars/secrets.yml
-    - group_vars/all.yml
-    - vars/ontap_main.yml
+    #- group_vars/secrets.yml
+    #- group_vars/all.yml
+    #- vars/ontap_main.yml
   connection: local
+  pre_tasks:
+    - name: Render secrets file from template
+      template:
+        src: group_vars/secrets.yml
+        dest: /tmp/secrets.yml
+        mode: '0600'
+
+    - name: Load rendered secrets
+      include_vars:
+        file: /tmp/secrets.yml
   roles:
   - { role: ONTAP/ontap_primary_setup, tags: [ 'ontap_primary_setup' ] }
   #- { role: ONTAP/ontap_network, tags: [ 'ontap_network' ] }
