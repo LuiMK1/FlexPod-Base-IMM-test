@@ -10,13 +10,23 @@
   pre_tasks:
     - name: Render secrets file from template
       template:
-        src: group_vars/secrets.yml
+        src: group_vars/secrets.yml.j2
         dest: /tmp/secrets.yml
         mode: '0600'
 
     - name: Load rendered secrets
       include_vars:
         file: /tmp/secrets.yml
+
+    - name: Render all vars file from template
+      template:
+        src: group_vars/all.yml.j2
+        dest: /tmp/all.yml
+        mode: '0600'
+
+    - name: Load rendered all vars
+      include_vars:
+        file: /tmp/all.yml
   roles:
   - { role: ONTAP/ontap_primary_setup, tags: [ 'ontap_primary_setup' ] }
   #- { role: ONTAP/ontap_network, tags: [ 'ontap_network' ] }

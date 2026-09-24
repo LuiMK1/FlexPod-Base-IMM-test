@@ -7,7 +7,7 @@
 
 - name: Print inventory hostname, username, and password
   ansible.builtin.debug:
-    msg: "hostname={{ inventory_hostname }} username={{ username }} password={{ password }}"
+    msg: "hostname={{ inventory_hostname }} username={{ username }} password={{ password }} dns_domain_name={{ dns_domain_name}} time_zone={{ time_zone }}  oob_vlan_id={{ oob_vlan_id }} native_vlan_id={{ native_vlan_id }}"
 
 # Ensure that the auto-revert parameter is set for the cluster management interface
 #- name: Ensure auto-revert is set for the cluster management interface

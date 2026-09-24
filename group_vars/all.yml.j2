@@ -1,0 +1,49 @@
+# This file is rendered at runtime from Stack Automation inputs
+
+configure_fc: '{{ configure_fc }}'
+
+#use_nexus_ntp_distribution: '{{ use_nexus_ntp_distribution }}'
+
+global_NTP_servers:
+{% for ip in global_ntp_servers_csv.split(',') %}
+  - "{{ ip.strip() }}"
+{% endfor %}
+
+ntp_servers:
+{% for ip in ntp_servers_csv.split(',') %}
+  - ip_address: "{{ ip.strip() }}"
+{% endfor %}
+
+#switch_timezone_command: "{{ switch_timezone_command }}"
+#summer_time_command: "{{ summer_time_command }}"
+
+dns_servers:
+{% for ip in dns_servers_csv.split(',') %}
+  - ip_address: "{{ ip.strip() }}"
+{% endfor %}
+
+dns_domain_name: "{{ dns_domain_name }}"
+time_zone: "{{ time_zone }}"
+
+configure_snmpv3: {{ configure_snmpv3 }}
+global_snmp_user_name: "{{ global_snmp_user_name }}"
+global_snmp_auth_password: "{{ snmp_password }}"
+global_snmp_priv_password: "{{ snmp_password }}"
+global_snmp_contact: "{{ global_snmp_contact }}"
+global_snmp_location: "{{ global_snmp_location }}"
+
+native_vlan_name: "{{ native_vlan_name }}"
+native_vlan_id: {{ native_vlan_id | int }}
+
+oob_vlan_name: "{{ oob_vlan_name }}"
+oob_vlan_id: {{ oob_vlan_id | int }}
+
+#enable_vsan_trunking: {{ enable_vsan_trunking }}
+
+#vsan_A_name: "{{ vsan_a_name }}"
+#vsan_A_id: {{ vsan_a_id }}
+#vsan_A_fcoe_vlan: {{ vsan_a_fcoe_vlan }}
+
+#vsan_B_name: "{{ vsan_b_name }}"
+#vsan_B_id: {{ vsan_b_id }}
+#vsan_B_fcoe_vlan: {{ vsan_b_fcoe_vlan }}
