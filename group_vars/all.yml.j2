@@ -2,8 +2,6 @@
 
 configure_fc: '{{ configure_fc }}'
 
-#use_nexus_ntp_distribution: '{{ use_nexus_ntp_distribution }}'
-
 global_NTP_servers:
 {% for ip in global_ntp_servers_csv.split(',') %}
   - "{{ ip.strip() }}"
