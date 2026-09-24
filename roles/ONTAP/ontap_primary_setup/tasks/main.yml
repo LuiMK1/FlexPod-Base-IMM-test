@@ -49,9 +49,6 @@
     password: "{{password}}"
     https: true
     validate_certs: false
-  environment:
-    http_proxy: ""
-    https_proxy: ""
   with_sequence: start=1 end="{{ total_port_count|int*2 }}" format=Default-%01x
   tags:
     - ontap_config_delete_broadcast_domain
