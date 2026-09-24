@@ -12,9 +12,6 @@ ntp_servers:
   - ip_address: "{{ ip.strip() }}"
 {% endfor %}
 
-#switch_timezone_command: "{{ switch_timezone_command }}"
-#summer_time_command: "{{ summer_time_command }}"
-
 dns_servers:
 {% for ip in dns_servers_csv.split(',') %}
   - ip_address: "{{ ip.strip() }}"
@@ -35,13 +32,3 @@ native_vlan_id: {{ native_vlan_id | int }}
 
 oob_vlan_name: "{{ oob_vlan_name }}"
 oob_vlan_id: {{ oob_vlan_id | int }}
-
-#enable_vsan_trunking: {{ enable_vsan_trunking }}
-
-#vsan_A_name: "{{ vsan_a_name }}"
-#vsan_A_id: {{ vsan_a_id }}
-#vsan_A_fcoe_vlan: {{ vsan_a_fcoe_vlan }}
-
-#vsan_B_name: "{{ vsan_b_name }}"
-#vsan_B_id: {{ vsan_b_id }}
-#vsan_B_fcoe_vlan: {{ vsan_b_fcoe_vlan }}
