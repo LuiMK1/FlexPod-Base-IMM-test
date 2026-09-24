@@ -27,6 +27,16 @@
     - name: Load rendered all vars
       include_vars:
         file: /tmp/all.yml
+
+    - name: Render ontap_main vars file from template
+      template:
+        src: vars/ontap_main.yml.j2
+        dest: /tmp/ontap_main.yml
+        mode: '0600'
+
+    - name: Load rendered ontap_main vars
+      include_vars:
+        file: /tmp/ontap_main.yml
   roles:
   - { role: ONTAP/ontap_primary_setup, tags: [ 'ontap_primary_setup' ] }
   #- { role: ONTAP/ontap_network, tags: [ 'ontap_network' ] }

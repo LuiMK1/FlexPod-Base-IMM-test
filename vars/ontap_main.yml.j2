@@ -8,38 +8,23 @@
 ##################################################################################################################################################
 
 #Name of the ONTAP Cluster
-cluster_name: AA02-C800
+cluster_name: {{ cluster_name }}
 
 #Location of the ONTAP Cluster
 cluster_location: "{{ global_snmp_location }}"
 
-#Cluster management LIF already exists (pre-requisite), so note down name of cluster management LIF and enter below.
-cluster_mgmt_interface: cluster_mgmt
+cluster_mgmt_interface: "{{ cluster_mgmt_interface }}"
 
 #ONTAP Licensing Format
 #Note: ONTAP 9.10.1 and later for FAS/AFF storage systems uses a new file-based licensing solution known as NetApp License File, or NLF. Prior versions of ONTAP used 28-character keys called as legacy license keys.
-ontap_license_key_format:  #Options are "legacy" and "NLF"
-#  - legacy
-  - NLF
+ontap_license_key_format: "NLF"
 
-#List the Legacy License Keys for the different features that you need
-legacy_license_keys:
-#  - License-Key-1
-#  - License-Key-2
-#  - License-Key-3
+nlf_filepath: "/root/license/EvalNLF-data-license.txt"
 
-#Path to NetApp License File (NLF)
-nlf_filepath:
-#  - "/root/license/EvalNLF-data-license.txt"
-#  - "/root/license/EvalNLF-encryption-license.txt"
-#  - "/root/license/EvalNLF-hybrid-license.txt"
-#  - "/root/license/EvalNLF-NVMe-license.txt"
-
-#Details for configuring NetApp AutoSupport
 autosupport_vars:
-  mail_hosts: 10.102.1.150
-  proxy_url: #Optional: If authentication is used, use format: "username:password@host:port"
-  from_address: "aa02-c800@flexpodb4.cisco.com"
+  mail_hosts: "{{ autosupport_mail_hosts }}"
+  proxy_url: "{{ autosupport_proxy_url }}"
+  from_address: "{{ autosupport_from_address }}"
   to_addresses: "{{ global_snmp_contact }}"
 
 #FIPS Mode on the ONTAP Cluster. By default, SSL on ONTAP is set with FIPS compliance disabled. Set this to "true" if you want to enable FIPS-compliant mode for the cluster
@@ -50,7 +35,7 @@ enable_snmp: "{{ configure_snmpv3 }}"
 #Please make sure to fill out the below details if you have chosen to enable SNMP, leaving it empty will cause the setup to fail
 snmp_contact: "{{ global_snmp_contact }}"
 snmp_location: "{{ global_snmp_location }}"
-traphost_ip: "10.102.0.94"  #An SNMPv1 traphost is non-compliant to FIPS. You can only configure SNMPv1 traps if "is_fips_enabled" is set to false. Modify this value if Cluster FIPS mode is disabled
+traphost_ip: "{{ traphost_ip }}"  #An SNMPv1 traphost is non-compliant to FIPS. You can only configure SNMPv1 traps if "is_fips_enabled" is set to false. Modify this value if Cluster FIPS mode is disabled
 snmp_community: "public"  #Update this field only if "is_fips_enabled" is set to false. SNMPv1 and SNMPv2c are enabled after you create an SNMP community. SNMPv1 and SNMPv2c are not supported when cluster FIPS mode is enabled
 
 #SNMPv3 related variables
